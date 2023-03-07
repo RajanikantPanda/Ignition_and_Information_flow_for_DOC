@@ -16,3 +16,6 @@ The above code compute:
 2. Tau, which measure the ‘memory depth’ of the signal. 
 3. Computational model-based approach which measure the propagation of perturbations by causal spatiotemporal properties of time series given by the network effective connectivity (EC) 
    and the dynamic communicability, i.e. time-dependent graph-like descriptors. From nodal communicability, we capture the capacity of the brain region to receive and broadcast information flow after perturbations.
+
+
+TO estimation of effective connectivity you need to instal the pyMOU Python package (https://github.com/mb-BCA/pyMOU) and for the study of responses to exogenous perturbations, you need to instal NetDynFlow package in Python (https://github.com/mb-BCA/NetDynFlow).
