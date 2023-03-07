@@ -28,7 +28,6 @@ show_graphs = True
 #%% general properties
 # load fMRI data
 ts_tmp_cnt = sio.loadmat('data_controls_all')['ts_all']
-ts_tmp_cnt = np.concatenate((ts_tmp_cnt[0:22,:,:], ts_tmp_cnt[23:30,:,:], ts_tmp_cnt[31:35,:,:]), axis=0)  
 ts_tmp_mcs = sio.loadmat('data_MCS_all_2_fMRI')['ts_all']
 ts_tmp_uws = sio.loadmat('data_UWS_all_2_fMRI')['ts_all']
 ts_tmp= np.concatenate((ts_tmp_cnt, ts_tmp_mcs, ts_tmp_uws), axis=0)  
@@ -199,8 +198,6 @@ np.save(res_dir+'Sigma_mod.npy',Sigma_mod2) # estimated Sigma matrices
 np.save(res_dir+'J_mod_old.npy',J_mod) # estimated Jacobian matrices (EC + inverse time constant on diagonal)
 np.save(res_dir+'Sigma_mod_old.npy',Sigma_mod) # estimated Sigma matrices
 
-
-#%% save results
 sio.savemat(res_dir+'J_mod.mat', {'J_mod2':J_mod2})
 sio.savemat(res_dir+'Sigma_mod.mat', {'Sigma_mod2':Sigma_mod2})
 sio.savemat(res_dir+'FC_emp.mat', {'FC_emp':FC_emp})
