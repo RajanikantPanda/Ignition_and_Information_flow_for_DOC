@@ -18,4 +18,4 @@ The above code compute:
    and the dynamic communicability, i.e. time-dependent graph-like descriptors. From nodal communicability, we capture the capacity of the brain region to receive and broadcast information flow after perturbations.
 
 
-TO estimation of effective connectivity you need to instal the pyMOU Python package (https://github.com/mb-BCA/pyMOU) and for the study of responses to exogenous perturbations (i.e., dynamic communicability), you need to instal NetDynFlow package in Python (https://github.com/mb-BCA/NetDynFlow) developer by Matthieu Gilson and Gorka Zamora-López (UPF).
+TO estimation of effective connectivity you need to instal the pyMOU Python package (https://github.com/mb-BCA/pyMOU) and for the study of responses to exogenous perturbations (i.e., dynamic communicability), you need to instal NetDynFlow package in Python (https://github.com/mb-BCA/NetDynFlow) developed by Matthieu Gilson and Gorka Zamora-López (UPF).
