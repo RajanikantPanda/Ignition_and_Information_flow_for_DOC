@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Thu Nov 23 17:34:37 2017
-
 @author: matgilson
 """
 
@@ -44,17 +42,12 @@ n_tau = v_tau.size
 
 
 #%% functional data
-
-# load fMRI data
-#ts_tmp = np.zeros([n_sub,N,T])
-#ts_tmp = sio.loadmat('data_MCS_all_2')['ts_all']
-#print(ts_tmp.shape)
 # filtering between 0.01 and 0.1 Hz
 n_order = 3
 TR = 2.
 Nyquist_freq = 0.5 / TR
 low_f = 0.01 / Nyquist_freq
-high_f = 0.15 / Nyquist_freq
+high_f = 0.1 / Nyquist_freq
 b,a = spsg.iirfilter(n_order,[low_f,high_f],btype='bandpass',ftype='butter')
 
 # calculate FC
