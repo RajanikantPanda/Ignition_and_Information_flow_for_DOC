@@ -89,7 +89,7 @@ print(SC_anat.shape)
 # mask for existing connections in EC
 mask_EC = np.zeros([N,N],dtype=bool)
 # limit DTI value to determine SC (only connections with larger values are tuned)
-lim_SC = 0.0067 #0.005  # SC density value , determines 20 to 30% top connections xxx 0.01
+lim_SC = 0.0067 # SC density value
 # threshold DTI to obtain EC mask
 mask_EC[SC_anat>lim_SC] = True
 for i in range(N):
