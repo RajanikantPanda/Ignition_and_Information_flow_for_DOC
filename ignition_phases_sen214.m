@@ -3,7 +3,7 @@
 %%%%%%% Modified and Adopted By: Rajanikant Panda 
 %%%%%%% Date of Modification: 1st September 2019 
 %%%%%%% Supervised: Gustavo Deco (UPF), Steven Laureys(Uliege), Jitka
-%%%%%%% Annen(Uliege)  and Ane A LÛpez-Gonz·lez (UPF)
+%%%%%%% Annen(Uliege)  and Ane A L√≥pez-Gonz√°lez (UPF)
 
 %Input Bold Time Series: 3D mat file in the format of No_os_Subj x ROIs x TimePoi
 %output
@@ -18,21 +18,17 @@
     % view this imagesc(phasematrix), imagesc(events)
 clear
 clc
-
-CNT = load('F:\CSG\fMRI\FrontoParietalDOC\GT_DFC\Data_NxTxB\timeseries_all_CNT_04092019.mat');
-CNT=CNT.ts_all; CNT=[CNT(1:22,:,:);CNT(24:32,:,:);CNT(34:35,:,:)]; CNT = num2cell(CNT,[2,3])';
+CNT = load('F:\GT_DFC\timeseries_all_CNT.mat');
 for i=1:size(CNT,2)
     CNT{i} = squeeze(CNT{1,i});
 end
-%MCS = load('F:\CSG\fMRI\FrontoParietalDOC\GT_DFC\Data_NxTxB\New_150120202\data_MCS_all_2.mat')
-MCS =load('F:\CSG\fMRI\FrontoParietalDOC\GT_DFC\IntensicIgnition\MCS.mat')
+MCS =load('F:\GT_DFC\IntensicIgnition\MCS.mat')
 MCS=MCS.ts_all;  
 MCS = num2cell(MCS,[2,3])';
 for i=1:size(MCS,2)
     MCS{i} = squeeze(MCS{1,i});
 end
-%UWS = load('F:\CSG\fMRI\FrontoParietalDOC\GT_DFC\Data_NxTxB\New_150120202\data_UWS_all_2_fMRI.mat')
-UWS=load('F:\CSG\fMRI\FrontoParietalDOC\GT_DFC\IntensicIgnition\UWS.mat')
+UWS=load('F:\GT_DFC\IntensicIgnition\UWS.mat')
 UWS=UWS.ts_all; UWS = num2cell(UWS,[2,3])';
 for i=1:size(UWS,2)
     UWS{i} = squeeze(UWS{1,i});
@@ -44,9 +40,9 @@ timeseries{1,3}=UWS;
 %% %% Ignition Measures
 for cond=1:3   %to run in Intrensic ignition measures for each group
     % count the number of subjects in each group/condition  
-    numb_subj(1)=size(timeseries{1,1},2); %numb_subj(1)=size(timeseries{1,1},1);
-    numb_subj(2)=size(timeseries{1,2},2); %numb_subj(2)=size(timeseries{1,2},1);
-    numb_subj(3)=size(timeseries{1,3},2); %numb_subj(3)=size(timeseries{1,3},1);
+    numb_subj(1)=size(timeseries{1,1},2); 
+    numb_subj(2)=size(timeseries{1,2},2); 
+    numb_subj(3)=size(timeseries{1,3},2); 
     % To take data of one group/condition
      if cond==1
         TC=timeseries{1};
@@ -55,11 +51,9 @@ for cond=1:3   %to run in Intrensic ignition measures for each group
     elseif cond==3
         TC=timeseries{3};
     end
-  %% adapt parameters to YOUR data
   
   TR= 2; %sampling interval(TR)  
-  %Tmax=217; %timepoints (computed later by size)
-  N = size(TC{1},1); %246; %214;%758;%90;  regions
+  N = size(TC{1},1); % regions
   NSUB = numb_subj(cond); %subjects
   Isubdiag = find(tril(ones(N),-1));
   nTRs = 5; % nTRs-1 == TRs to compute ignition after spontanous events (Ideal 5)
@@ -73,8 +67,8 @@ for cond=1:3   %to run in Intrensic ignition measures for each group
 
   FC = zeros(NSUB,N,N);
 
-  flp = 0.03;   %0.04     % lowpass frequency of filter
-  fhi = 0.08;   %0.07     % highpass
+  flp = 0.03;             % lowpass frequency of filter
+  fhi = 0.08;             % highpass
   delt = TR;              % sampling interval
   k = 2;                  % 2nd order butterworth filter
   fnq = 1/(2*delt);       % Nyquist frequency
@@ -157,9 +151,8 @@ for cond=1:3   %to run in Intrensic ignition measures for each group
 
 end %end obtain integ
 %%%%% 
- %% %
- %%%% event trigger
-     %%%% to change DMN intigration for betwen network for FP 
+%% %
+%%%% event trigger
      
     nevents2 = zeros(1,N);
     % save events and integration values for nTRs after the event
@@ -193,12 +186,7 @@ end %end obtain integ
       end
       index_events{seed}=find(events(seed,:)==1);
     end
-%     plot(integt,'Linewidth',2)
-% hold on
-%     for seed=1:N
-%  
-% plot(index_events{seed},integt(index_events{seed}),'o')
-%     end
+
   %mean and std of the max ignition in the nTRs for each subject and for each node  
     for seed = 1:N
       %mevokedinteg2OLD(seed)=max(mean(squeeze(IntegStim2(seed,:,1:nevents2(seed))),2));
@@ -231,7 +219,7 @@ end %end obtain integ
      %mevokedQ(seed,:)=mean(squeeze(IntegStimQ(seed,:,1:nevents(seed))),2);
   end
   
-  cd ('F:\CSG\fMRI\FrontoParietalDOC\GT_DFC\IntensicIgnition\ReCal_forEvent')
+  cd ('F:\GT_DFC\IntensicIgnition')
 
   save (sprintf('%dTR_SS_Ignition_CASE%d_Phases', nTRs-1, CASE), 'mevGL', 'stdevGL', 'mevokedinteg',...
       'mevokedintegSS', 'stdevokedintegSS', 'mignitionAN', 'stdignitionAN', 'SubjEvents', 'SubjEvents_std', 'SubjEvents_mean_std');
